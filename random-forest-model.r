@@ -1,3 +1,5 @@
+# random-forest-model.r
+
 library(tidyverse)
 library(randomForest)
 library(caret)
@@ -19,17 +21,15 @@ train_index <- createDataPartition(rf_dashboard$df$y, p = 0.8, list = FALSE)
 rf_dashboard$train <- rf_dashboard$df[train_index, ]
 rf_dashboard$test <- rf_dashboard$df[-train_index, ]
 
-# Train model
-rf_dashboard$rf_model <- randomForest(y ~ ., data = rf_dashboard$train, ntree = 3, importance = TRUE)
-
-# Predict
-rf_dashboard$preds <- predict(rf_dashboard$rf_model, rf_dashboard$test)
-rf_dashboard$probs <- predict(rf_dashboard$rf_model, rf_dashboard$test, type = "prob")
-rf_dashboard$conf_mat <- confusionMatrix(rf_dashboard$preds, rf_dashboard$test$y)
-rf_dashboard$importance_df <- as.data.frame(importance(rf_dashboard$rf_model))
-
-# Metrics
-rf_dashboard$accuracy <- mean(rf_dashboard$preds == rf_dashboard$test$y)
-rf_dashboard$precision <- posPredValue(rf_dashboard$preds, rf_dashboard$test$y, positive = "yes")
-rf_dashboard$recall <- sensitivity(rf_dashboard$preds, rf_dashboard$test$y, positive = "yes")
-rf_dashboard$f1 <- (2 * rf_dashboard$precision * rf_dashboard$recall) / (rf_dashboard$precision + rf_dashboard$recall)
+# Define training logic (called on demand)
+rf_dashboard$train_model <- function(ntree = 100) {
+  rf_dashboard$rf_model <- randomForest(y ~ ., data = rf_dashboard$train, ntree = ntree, importance = TRUE)
+  rf_dashboard$preds <- predict(rf_dashboard$rf_model, rf_dashboard$test)
+  rf_dashboard$probs <- predict(rf_dashboard$rf_model, rf_dashboard$test, type = "prob")
+  rf_dashboard$conf_mat <- confusionMatrix(rf_dashboard$preds, rf_dashboard$test$y)
+  rf_dashboard$importance_df <- as.data.frame(importance(rf_dashboard$rf_model))
+  rf_dashboard$accuracy <- mean(rf_dashboard$preds == rf_dashboard$test$y)
+  rf_dashboard$precision <- posPredValue(rf_dashboard$preds, rf_dashboard$test$y, positive = "yes")
+  rf_dashboard$recall <- sensitivity(rf_dashboard$preds, rf_dashboard$test$y, positive = "yes")
+  rf_dashboard$f1 <- (2 * rf_dashboard$precision * rf_dashboard$recall) / (rf_dashboard$precision + rf_dashboard$recall)
+}
