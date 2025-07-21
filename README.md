@@ -1,5 +1,3 @@
-
-# 🧠 Bank Marketing - Random Forest Dashboard
 ![Dashboard Screenshot](docs/Screenshot1.png)
 
 ## 📦 Dataset: Bank Marketing (`bank-additional-full.csv`)
