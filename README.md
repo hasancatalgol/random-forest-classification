@@ -23,14 +23,6 @@
 - Parameters:
   - `ntree = 3`
 
-### 📊 Model Metrics (on test set)
-| Metric     | Value     |
-|------------|-----------|
-| Accuracy   | 91.43%    |
-| Precision  | 65.50%    |
-| Recall     | 50.54%    |
-| F1 Score   | 57.06%    |
-
 ---
 
 ## 🖥️ Shiny Dashboard Features
@@ -69,8 +61,3 @@
 - No model is saved — everything runs in memory.
 
 ---
-
-## 💡 Potential Next Steps
-- Add row selector or pagination to prediction table
-- Allow retraining with different `ntree` settings
-- Visualize feature importance as a bar chart
