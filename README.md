@@ -1,6 +1,13 @@
 ![Dashboard Screenshot](docs/Screenshot1.png)
 
 ## 📦 Dataset: Bank Marketing (`bank-additional-full.csv`)
+The dataset is from a Portuguese banking institution, collected from 2008–2013.
+
+It contains information from phone-based marketing campaigns aimed at selling term deposits.
+
+Includes categorical and numerical attributes related to customer profiles, campaign success, and economic context.
+
+More details: 📄 UCI Bank Marketing Dataset
 - **Source**: UCI Machine Learning Repository
 - **Goal**: Predict whether a client will subscribe to a term deposit
 - **Target Variable**: `y` (values: `"yes"` or `"no"`)
